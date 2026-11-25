@@ -1,0 +1,48 @@
+# Local development stack.
+#   docker compose up -d db mail        -> run the API from your IDE with SPRING_PROFILES_ACTIVE=dev
+#   docker compose --profile app up -d  -> everything in containers (API on :8080, Mailpit UI on :8025)
+name: campusquest
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: campusquest
+      POSTGRES_USER: campusquest
+      POSTGRES_PASSWORD: campusquest
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campusquest -d campusquest"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mail:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "127.0.0.1:1025:1025"
+      - "127.0.0.1:8025:8025"
+
+  api:
+    profiles: ["app"]
+    build: ./api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DATABASE_URL: jdbc:postgresql://db:5432/campusquest
+      DATABASE_USERNAME: campusquest
+      DATABASE_PASSWORD: campusquest
+      SMTP_HOST: mail
+      SMTP_PORT: 1025
+      CORS_ALLOWED_ORIGINS: http://localhost:5173
+      PUBLIC_BASE_URL: http://localhost:5173
+    ports:
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  db-data:
