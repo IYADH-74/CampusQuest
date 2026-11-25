@@ -2,7 +2,8 @@
 
 The original API is kept verbatim in [`legacy/api`](../legacy/api) and on the `legacy-v2` branch. This is
 the catalogue of what was wrong with it: a record of why v3 exists, and seed material for a future CTF.
-Each item names the v3 control that closes it.
+Each item names the v3 control that closes it. For the narrative version, with code side by side, see
+[Same app, two developers](v2-vs-v3.md).
 
 Paths below are relative to `legacy/api/src/main/java/com/apex/campu_quest_v2/`.
 

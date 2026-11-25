@@ -9,8 +9,9 @@ XP, level up, and unlock room for more challenges as they go.
 
 This is v3: a ground-up rewrite of a second-year university project, built secure by default.
 The original code is kept in [`legacy/`](legacy) along with a
-[catalogue of its 20 vulnerabilities](docs/legacy-vulnerabilities.md). Each one is closed in v3 and has a
-regression test proving it.
+[catalogue of its 20 vulnerabilities](docs/legacy-vulnerabilities.md), each closed in v3. For the story of
+what changed and why, read **[Same app, two developers](docs/v2-vs-v3.md)**: the student's version and the
+engineer's version, side by side.
 
 ## Highlights
 
