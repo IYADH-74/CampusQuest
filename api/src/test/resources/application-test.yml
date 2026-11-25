@@ -1,0 +1,14 @@
+campusquest:
+  public-base-url: http://localhost:5173
+  security:
+    jwt:
+      allow-ephemeral-keys: true
+    verification:
+      pepper: test-only-pepper-0123456789abcdef0123456789abcdef
+  game:
+    expiry-sweep-interval: PT1H
+
+logging:
+  level:
+    com.campusquest: INFO
+    org.testcontainers: WARN
